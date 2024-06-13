@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDom from "react-dom";
+import ReactDom from "react-dom/client";
 /**
  * Header
  * -logo
@@ -33,7 +33,11 @@ const Header = () => {
     </div>
   );
 };
-const Restaruntcard = () => {
+
+const Restaruntcard = (props) => {
+  // console.log(kfc);
+  const { resData } = props;
+  // const { resname, cuisine } = props;
   return (
     <div className="res-card">
       <img
@@ -41,18 +45,84 @@ const Restaruntcard = () => {
         alt="meghanafood"
         src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/xqwpuhgnsaf18te7zvtv"
       />
-      <h3>Meghana Foods</h3>
-      <h4>Birayani,North Indian,Asian</h4>
+      <h3>{resData.info.name}</h3>
+      <h4>{}</h4>
       <h4>4.4 stars</h4>
       <h4>38 minutes</h4>
     </div>
   );
 };
+const resObj = {
+  info: {
+    id: "581809",
+    name: "UBQ by Barbeque Nation",
+    cloudinaryImageId: "muaktnk5xb3zop4bvj6l",
+    locality: "7th Block",
+    areaName: "Koramangala",
+    costForTwo: "₹300 for two",
+    cuisines: [
+      "North Indian",
+      "Barbecue",
+      "Biryani",
+      "Kebabs",
+      "Mughlai",
+      "Desserts",
+    ],
+    avgRating: 3.9,
+    parentId: "10804",
+    avgRatingString: "3.9",
+    totalRatingsString: "100+",
+    sla: {
+      deliveryTime: 37,
+      lastMileTravel: 1.4,
+      serviceability: "SERVICEABLE",
+      slaString: "35-40 mins",
+      lastMileTravelString: "1.4 km",
+      iconType: "ICON_TYPE_EMPTY",
+    },
+    availability: {
+      nextCloseTime: "2024-06-13 23:30:00",
+      opened: true,
+    },
+    badges: {},
+    isOpen: true,
+    type: "F",
+    badgesV2: {
+      entityBadges: {
+        imageBased: {},
+        textBased: {},
+        textExtendedBadges: {},
+      },
+    },
+    aggregatedDiscountInfoV3: {
+      header: "50% OFF",
+      subHeader: "UPTO ₹100",
+    },
+    differentiatedUi: {
+      displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+      differentiatedUiMediaDetails: {
+        mediaType: "ADS_MEDIA_ENUM_IMAGE",
+        lottie: {},
+        video: {},
+      },
+    },
+    reviewsSummary: {},
+    displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+    restaurantOfferPresentationInfo: {},
+  },
+  analytics: {},
+  cta: {
+    link: "https://www.swiggy.com/restaurants/ubq-by-barbeque-nation-7th-block-koramangala-bangalore-581809",
+    type: "WEBLINK",
+  },
+};
+
 const Body = () => {
   return (
     <div className="body">
       <div className="search">Search</div>
       <div className="res-container">
+        <Restaruntcard resData={resObj} />
         <Restaruntcard />
         <Restaruntcard />
         <Restaruntcard />
@@ -60,12 +130,6 @@ const Body = () => {
         <Restaruntcard />
         <Restaruntcard />
         <Restaruntcard />
-        <Restaruntcard />
-        <Restaruntcard />
-        <Restaruntcard />
-        <Restaruntcard />
-        <Restaruntcard />
-       
       </div>
     </div>
   );
