@@ -9,7 +9,7 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   const fetchData = async () => {
     const data = await fetch(
