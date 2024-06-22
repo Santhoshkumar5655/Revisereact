@@ -2,6 +2,7 @@ import Restaruntcard from "./Restaruntcard";
 import { useState, useEffect } from "react";
 import reslist from "../utils/mockData";
 import Shimmer from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router-dom";
 const Body = () => {
   const [listofres, setlistofres] = useState([]);
@@ -28,6 +29,11 @@ const Body = () => {
     //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     // );
   };
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus == false) {
+    return <h1>Looks like offline </h1>;
+  }
 
   if (listofres.length == 0) {
     return <Shimmer />;
