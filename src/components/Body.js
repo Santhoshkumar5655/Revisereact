@@ -1,4 +1,4 @@
-import Restaruntcard from "./Restaruntcard";
+import Restaruntcard, { withPromotedLabel } from "./Restaruntcard";
 import { useState, useEffect } from "react";
 import reslist from "../utils/mockData";
 import Shimmer from "./Shimmer";
@@ -9,6 +9,8 @@ const Body = () => {
   const [searchtext, setsearchtext] = useState("");
   const [filteredRestarunt, setfil] = useState([]);
 
+  const Promotedlabel = withPromotedLabel(Restaruntcard);
+  console.log(listofres);
   useEffect(() => {
     fetchData();
   }, []);
@@ -40,17 +42,18 @@ const Body = () => {
   }
   return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="m-4 p-4x ">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black"
             value={searchtext}
             onChange={(e) => {
               setsearchtext(e.target.value);
             }}
           ></input>
           <button
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               const filteredRestarunt = listofres.filter((res) =>
                 res?.info?.name
@@ -63,28 +66,40 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          className="filter-button"
-          onClick={() => {
-            setlistofres;
-            console.log("button clicked");
-            filteredlist = listofres.filter(
-              (res) => res?.info?.avgRatingString > 4
-            );
-            setlistofres(filteredlist);
-            console.log(listofres);
-          }}
-        >
-          Top Rated Restarunt
-        </button>
+        <div className="m-4 p-4x flex items-center">
+          <button
+            className="px-4 py-2 bg-green-100 m-4 flex items-center rounded-lg"
+            onClick={() => {
+              setlistofres;
+              console.log("button clicked");
+              filteredlist = listofres.filter(
+                (res) => res?.info?.avgRatingString > 4
+              );
+              setlistofres(filteredlist);
+              console.log(listofres);
+            }}
+          >
+            Top Rated Restarunt
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap">
         {filteredRestarunt.map((restarunt) => (
           <Link
             key={restarunt?.info?.id}
             to={"/restaurants/" + restarunt?.info?.id}
           >
-            <Restaruntcard resData={restarunt} />
+            {/* {restaurant.data.promoted ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )} */}
+            {/* {<Restaruntcard resData={restarunt} />} */}
+            {restarunt.info?.avgRatingString > 4 ? (
+              <Promotedlabel resData={restarunt} />
+            ) : (
+              <Restaruntcard resData={restarunt} />
+            )}
           </Link>
         ))}
       </div>
