@@ -13,16 +13,16 @@ const ItemList = ({ items }) => {
       ))}
     </div>
   );
-  // <div>
-  //   {items.map((k) => (
-  //     <div key={k?.card?.info?.id}>
-  //       <div>
-  //         <span>{k?.card?.info?.name}</span>
-  //         <span>{k?.card?.info?.name}</span>
-  //       </div>
-  //     </div>
-  //   ))}
-  // </div>
+  <div>
+    {items.map((k) => (
+      <div key={k?.card?.info?.id}>
+        <div>
+          <span>{k?.card?.info?.name}</span>
+          <span>{k?.card?.info?.name}</span>
+        </div>
+      </div>
+    ))}
+  </div>;
 };
 
 export default ItemList;
